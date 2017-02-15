@@ -21,9 +21,19 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate,UI
   var databaseReference: FIRDatabaseReference!
   var user: FIRUser?
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
+        self.databaseReference = FIRDatabase.database().reference().child("posts")
+    
+    FIRAuth.auth()?.signInAnonymously(completion: { (user: FIRUser?, error: Error?) in
+      if let error = error {
+        print(error)
+      }
+      else {
+        self.user = user
+      }
+    })
+
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -106,7 +116,7 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate,UI
       }
       else {
         print(reference)
-        self.dismiss(animated: true, completion: nil)
+//        self.dismiss(animated: true, completion: nil)
       }
     }
   }

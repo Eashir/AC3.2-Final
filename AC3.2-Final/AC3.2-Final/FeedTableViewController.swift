@@ -21,8 +21,9 @@ class FeedTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.databaseReference = FIRDatabase.database().reference().child("posts")
+    self.storage = FIRStorage.storage().reference(forURL: "gs://ac-32-final.appspot.com")
+    
     getPosts()
-    storage = FIRStorage.storage().reference(forURL: "gs://ac-32-final.appspot.com")
     
     tableView.estimatedRowHeight = 500
     tableView.rowHeight = UITableViewAutomaticDimension
