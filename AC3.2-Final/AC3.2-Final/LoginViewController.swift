@@ -14,27 +14,30 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
   @IBOutlet weak var emailTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   
-//  let databaseReference = FIRDatabase.database().reference().child("posts")
-//  var databaseObserver:FIRDatabaseHandle?
   var signInUser: FIRUser?
+  
   let loginFailAlert = UIAlertController(title: "Login Failed", message: "Plz", preferredStyle: UIAlertControllerStyle.alert)
   let loginSuccessAlert = UIAlertController(title: "Login Successful!", message: "", preferredStyle: UIAlertControllerStyle.alert)
+  let loginAnonSuccessAlert = UIAlertController(title: "Login Successful!", message: "Logged in anonymously", preferredStyle: UIAlertControllerStyle.alert)
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    passwordTextField.isSecureTextEntry = true
+    addActionsToAlert()
+    
+  }
+  
+  func addActionsToAlert () {
     let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
       (result : UIAlertAction) -> Void in
-      print("OK")
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      let tvc = storyboard.instantiateViewController(withIdentifier: "tabController")
+      self.present(tvc, animated: true, completion: nil)
     }
     loginSuccessAlert.addAction(okAction)
     loginFailAlert.addAction(okAction)
-//    let feedVC = FeedTableViewController()
-//    if FIRAuth.auth()?.currentUser != nil {
-//      self.navigationController?.pushViewController(feedVC, animated: true)
-//      
-//    }
-    
+    loginAnonSuccessAlert.addAction(okAction)
   }
   
   // MARK: UITextFieldDelegate
@@ -47,44 +50,58 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     default:
       break
     }
-    
     return true
   }
   
   // MARK: Actions
   @IBAction func didTapLogin(_ sender: UIButton) {
-    if let email = emailTextField.text,
-      let password = passwordTextField.text {
-      FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user: FIRUser?, error: Error?) in
-        
-        if user != nil {
-          let newViewController = FeedTableViewController()
-          if let tabVC =  self.navigationController {
-            tabVC.show(newViewController, sender: nil)
-          }
-        } else {
-          self.present(self.loginFailAlert, animated: true, completion: nil)
-        }
-      })
-    }
-
+    loginAnonymously()
+    //    if let email = emailTextField.text,
+    //      let password = passwordTextField.text {
+    //      FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user: FIRUser?, error: Error?) in
+    //
+    //        if user != nil {
+    //          let newViewController = FeedTableViewController()
+    //          if let tabVC =  self.navigationController {
+    //            tabVC.show(newViewController, sender: nil)
+    //          }
+    //        } else {
+    //          self.present(self.loginFailAlert, animated: true, completion: nil)
+    //        }
+    //      })
+    //    }
   }
   
   @IBAction func registeredPressed(_ sender: UIButton) {
+    if let email = emailTextField.text,
+      let password = passwordTextField.text {
+      FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user: FIRUser?, error: Error?) in
+        if error != nil {
+          print (error!)
+          
+          return
+        }
+        
+        guard let uid = user?.uid else { return }
+      })
+    }
+    
   }
   
-
-  
-  
-  
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using segue.destinationViewController.
-   // Pass the selected object to the new view controller.
-   }
-   */
+  private func loginAnonymously() {
+    FIRAuth.auth()?.signInAnonymously(completion: { (user: FIRUser? , error: Error? ) in
+      
+      print("signed in anonymously")
+      if error != nil {
+        print("Error: \(error!)")
+        self.present(self.loginFailAlert, animated: true, completion: nil)      }
+      
+      if user != nil {
+        self.present(self.loginAnonSuccessAlert, animated: true, completion: nil)
+      }
+    })
+    
+    
+  }
   
 }

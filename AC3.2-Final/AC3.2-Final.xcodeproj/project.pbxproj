@@ -18,6 +18,7 @@
 		CC00DDF51E54BAB8004709EC /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00DDF41E54BAB8004709EC /* FeedTableViewCell.swift */; };
 		CC00DDFB1E54C4E5004709EC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00DDFA1E54C4E5004709EC /* User.swift */; };
 		CC00DDFD1E54C4F0004709EC /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC00DDFC1E54C4F0004709EC /* Post.swift */; };
+		CCDAF1491E54F99F00163FE2 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDAF1481E54F99F00163FE2 /* UploadViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		CC00DDF41E54BAB8004709EC /* FeedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		CC00DDFA1E54C4E5004709EC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CC00DDFC1E54C4F0004709EC /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		CCDAF1481E54F99F00163FE2 /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,10 +78,11 @@
 				1EA113051E53C0B1004B66E3 /* Assets.xcassets */,
 				CC00DDF21E54B8E3004709EC /* FeedTableViewController.swift */,
 				CC00DDF41E54BAB8004709EC /* FeedTableViewCell.swift */,
-				1EA113071E53C0B1004B66E3 /* LaunchScreen.storyboard */,
 				CC00DDF01E54B41B004709EC /* LoginViewController.swift */,
+				CCDAF1481E54F99F00163FE2 /* UploadViewController.swift */,
 				CC00DDFA1E54C4E5004709EC /* User.swift */,
 				CC00DDFC1E54C4F0004709EC /* Post.swift */,
+				1EA113071E53C0B1004B66E3 /* LaunchScreen.storyboard */,
 				1EA1130A1E53C0B1004B66E3 /* Info.plist */,
 				1EA113121E53C130004B66E3 /* GoogleService-Info.plist */,
 			);
@@ -228,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC00DDF11E54B41B004709EC /* LoginViewController.swift in Sources */,
+				CCDAF1491E54F99F00163FE2 /* UploadViewController.swift in Sources */,
 				CC00DDF51E54BAB8004709EC /* FeedTableViewCell.swift in Sources */,
 				CC00DDF31E54B8E3004709EC /* FeedTableViewController.swift in Sources */,
 				CC00DDFD1E54C4F0004709EC /* Post.swift in Sources */,

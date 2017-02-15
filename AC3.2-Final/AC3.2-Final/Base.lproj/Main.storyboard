@@ -85,7 +85,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xsC-a5-xaD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-162" y="-791"/>
+            <point key="canvasLocation" x="-39" y="-791"/>
         </scene>
         <!--Feed-->
         <scene sceneID="iEd-q9-V7h">
@@ -110,7 +110,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a comment" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJL-Sf-ues">
-                                            <rect key="frame" x="8" y="396" width="140" height="21"/>
+                                            <rect key="frame" x="8" y="396" width="359" height="68.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -121,7 +121,9 @@
                                         <constraint firstItem="rla-Ao-WQh" firstAttribute="leading" secondItem="9sq-mm-GmP" secondAttribute="leading" id="AVe-2C-jqM"/>
                                         <constraint firstAttribute="trailing" secondItem="rla-Ao-WQh" secondAttribute="trailing" id="B30-69-RcN"/>
                                         <constraint firstItem="rla-Ao-WQh" firstAttribute="top" secondItem="9sq-mm-GmP" secondAttribute="topMargin" constant="13" id="NyN-kW-5w0"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="BJL-Sf-ues" secondAttribute="trailing" id="Pzu-qf-tB1"/>
                                         <constraint firstItem="BJL-Sf-ues" firstAttribute="top" secondItem="rla-Ao-WQh" secondAttribute="bottom" id="rbR-dq-ZBH"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="BJL-Sf-ues" secondAttribute="bottom" id="xAE-wv-tjO"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -144,7 +146,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="lID-7w-HdV">
             <objects>
-                <tabBarController id="rmt-B5-BGz" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabController" id="rmt-B5-BGz" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="KC3-Aa-1lC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -162,7 +164,7 @@
         <!--Upload-->
         <scene sceneID="Jee-in-nqO">
             <objects>
-                <viewController id="9Wd-Sq-Oar" sceneMemberID="viewController">
+                <viewController id="9Wd-Sq-Oar" customClass="UploadViewController" customModule="AC3_2_Final" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="voo-zE-UmF"/>
                         <viewControllerLayoutGuide type="bottom" id="JFp-tt-L9e"/>
@@ -170,18 +172,64 @@
                     <view key="view" contentMode="scaleToFill" id="LWr-a2-p7u">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-square" translatesAutoresizingMaskIntoConstraints="NO" id="3MB-Gh-1q5">
+                                <rect key="frame" x="16" y="20" width="343" height="420"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add a descripion..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uW2-b6-6o1">
+                                <rect key="frame" x="67" y="464" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <navigationBar contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="fm7-ze-b4p">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Unit6Final-staGram" id="N0f-lH-oQa">
+                                        <barButtonItem key="leftBarButtonItem" title="Photo Library" id="hXv-jx-i5k">
+                                            <connections>
+                                                <action selector="showImagePickerForPhotoPickerWithSender:" destination="9Wd-Sq-Oar" id="xhu-rE-Sr8"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="7eX-Ma-Yiq">
+                                            <connections>
+                                                <action selector="doneTapped:" destination="9Wd-Sq-Oar" id="Agb-4s-qhT"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="3MB-Gh-1q5" firstAttribute="trailing" secondItem="LWr-a2-p7u" secondAttribute="trailingMargin" id="B5k-Lp-XPj"/>
+                            <constraint firstItem="uW2-b6-6o1" firstAttribute="leading" secondItem="LWr-a2-p7u" secondAttribute="leadingMargin" constant="51" id="Bor-Co-G8V"/>
+                            <constraint firstItem="uW2-b6-6o1" firstAttribute="centerX" secondItem="3MB-Gh-1q5" secondAttribute="centerX" id="F0A-Ob-9qT"/>
+                            <constraint firstItem="3MB-Gh-1q5" firstAttribute="leading" secondItem="LWr-a2-p7u" secondAttribute="leadingMargin" id="KmG-vJ-Qvj"/>
+                            <constraint firstItem="uW2-b6-6o1" firstAttribute="centerX" secondItem="fm7-ze-b4p" secondAttribute="centerX" id="Lkr-VF-Hit"/>
+                            <constraint firstItem="fm7-ze-b4p" firstAttribute="leading" secondItem="LWr-a2-p7u" secondAttribute="leading" id="T19-jJ-ao0"/>
+                            <constraint firstItem="uW2-b6-6o1" firstAttribute="top" secondItem="3MB-Gh-1q5" secondAttribute="bottom" constant="24" id="UFn-i6-kF1"/>
+                            <constraint firstItem="uW2-b6-6o1" firstAttribute="centerX" secondItem="fm7-ze-b4p" secondAttribute="centerX" id="YFM-x2-OHi"/>
+                            <constraint firstItem="JFp-tt-L9e" firstAttribute="top" secondItem="uW2-b6-6o1" secondAttribute="bottom" constant="26" id="YeI-UC-8Tc"/>
+                            <constraint firstItem="3MB-Gh-1q5" firstAttribute="top" secondItem="voo-zE-UmF" secondAttribute="bottom" id="Z5o-qh-FRN"/>
+                            <constraint firstItem="fm7-ze-b4p" firstAttribute="top" secondItem="LWr-a2-p7u" secondAttribute="top" id="zcp-qC-n12"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Upload" image="upload" id="Ouv-cY-asW"/>
+                    <connections>
+                        <outlet property="uploadDescriptionTextView" destination="uW2-b6-6o1" id="yfV-N5-lgl"/>
+                        <outlet property="uploadImageView" destination="3MB-Gh-1q5" id="vqp-Zk-NMG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CqC-ID-Fb4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2031" y="-453"/>
+            <point key="canvasLocation" x="2029.5999999999999" y="-453.82308845577217"/>
         </scene>
     </scenes>
     <resources>
         <image name="chickenleg" width="75" height="76"/>
         <image name="meatly_logo" width="171" height="152"/>
+        <image name="placeholder-square" width="420" height="420"/>
         <image name="upload" width="44" height="44"/>
     </resources>
 </document>
