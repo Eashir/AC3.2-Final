@@ -21,9 +21,13 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate,UI
   var databaseReference: FIRDatabaseReference!
   var user: FIRUser?
   
+  let uploadFailAlert = UIAlertController(title: "Upload Failed", message: "Error", preferredStyle: UIAlertControllerStyle.alert)
+  let uploadSuccessAlert = UIAlertController(title: "Upload Successful!", message: "", preferredStyle: UIAlertControllerStyle.alert)
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-        self.databaseReference = FIRDatabase.database().reference().child("posts")
+    self.databaseReference = FIRDatabase.database().reference().child("posts")
+    addActionsToAlert()
     
     FIRAuth.auth()?.signInAnonymously(completion: { (user: FIRUser?, error: Error?) in
       if let error = error {
@@ -49,6 +53,17 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate,UI
       }
     }
   }
+  
+  
+  func addActionsToAlert () {
+    let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default) {
+      (result : UIAlertAction) -> Void in
+    }
+    
+    uploadSuccessAlert.addAction(okAction)
+    uploadFailAlert.addAction(okAction)
+  }
+
   
   @IBAction func showImagePickerForPhotoPicker(sender: UIBarButtonItem) {
     showImagePickerForSourceType(sourceType:.photoLibrary, fromButton: sender)
@@ -113,9 +128,11 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate,UI
     postRef.setValue(dict) { (error, reference) in
       if let error = error {
         print(error)
+        self.present(self.uploadFailAlert, animated: true)
       }
       else {
         print(reference)
+        self.present(self.uploadSuccessAlert, animated: true)
 //        self.dismiss(animated: true, completion: nil)
       }
     }
