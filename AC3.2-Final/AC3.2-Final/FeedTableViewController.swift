@@ -15,28 +15,17 @@ class FeedTableViewController: UITableViewController {
   
   var storage = FIRStorageReference()
   var databaseReference: FIRDatabaseReference!
-  //  var users = [User]()
   var posts = [Post]()
   var user: FIRUser?
-  var imageURLs: [String]?
-  var task: URLSessionDownloadTask!
-  var session: URLSession!
-  var cache:NSCache<AnyObject, AnyObject>!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     self.databaseReference = FIRDatabase.database().reference().child("posts")
     getPosts()
     storage = FIRStorage.storage().reference(forURL: "gs://ac-32-final.appspot.com")
-    getURLSForAllImages()
     
     tableView.estimatedRowHeight = 500
     tableView.rowHeight = UITableViewAutomaticDimension
-    
-    //Cache
-    session = URLSession.shared
-    task = URLSessionDownloadTask()
-    self.cache = NSCache()
   }
   
   
@@ -54,28 +43,6 @@ class FeedTableViewController: UITableViewController {
       self.tableView.reloadData()
     })
   }
-  
-  func getURLSForAllImages() {
-//    guard let validUser = user else { return }
-//    storage.child("images").downloadURL(completion: { (URL?, error:Error?) in
-//    
-//    })
-//      
-//    
-//    storage.child(validUser.uid).child("images").observe(.value, with: { (snapShot) in
-//      for child in snapShot.children.allObjects {
-//        if let child = child as? FIRDataSnapshot,
-//          let urlString = child.value as? String ,
-//          let valdImageURLs = self.imageURLs {
-//          if valdImageURLs.contains(urlString) == false {
-//            self.imageURLs?.append(urlString)
-//          }
-//        }
-//      }
-//      self.tableView.reloadData()
-//    })
-  }
-
   
   // MARK: - Table view data source
   
@@ -98,34 +65,12 @@ class FeedTableViewController: UITableViewController {
     
     storageRef.data(withMaxSize: 1 * 512 * 512) { data, error in
       if let error = error {
-        // Uh-oh, an error occurred!
+        print("ERROR WITH STORAGE")
       } else {
-        // Data for "images/island.jpg" is returned
         let image = UIImage(data: data!)
         cell.feedImageView.image = image
       }
     }
-    
-//    if (self.cache.object(forKey: (indexPath as NSIndexPath).row as AnyObject) != nil){
-//      cell.feedImageView?.image = self.cache.object(forKey: (indexPath as NSIndexPath).row as AnyObject) as? UIImage
-//    } else {
-//      guard let validImageURL = imageURLs?[indexPath.row] else {
-//        return cell
-//      }
-//      let url:URL! = URL(string: validImageURL)
-//      task = session.downloadTask(with: url, completionHandler: { (locationURL, response, error) -> Void in
-//        if let data = try? Data(contentsOf: url){
-//          DispatchQueue.main.async(execute: { () -> Void in
-//            if let updateCell = tableView.cellForRow(at: indexPath) as? FeedTableViewCell {
-//              let img:UIImage! = UIImage(data: data)
-//              updateCell.feedImageView?.image = img
-//              self.cache.setObject(img, forKey: (indexPath as NSIndexPath).row as AnyObject)
-//            }
-//          })
-//        }
-//      })
-//      task.resume()
-//    }
     
     return cell
   }
